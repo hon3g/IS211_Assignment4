@@ -81,13 +81,13 @@ def binary_search_recursive(a_list, item):
             return False
         else:
             midpoint = len(a_list) // 2
-        if a_list[midpoint] == item:
-            return True
-        else:
-            if item < a_list[midpoint]:
-                return _binary_search_recursive(a_list[:midpoint], item)
+            if a_list[midpoint] == item:
+                return True
             else:
-                return _binary_search_recursive(a_list[midpoint + 1:], item)
+                if item < a_list[midpoint]:
+                    return _binary_search_recursive(a_list[:midpoint], item)
+                else:
+                    return _binary_search_recursive(a_list[midpoint + 1:], item)
 
     found = _binary_search_recursive(a_list, item)
     t2 = ct()
