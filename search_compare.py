@@ -95,19 +95,13 @@ def binary_search_recursive(a_list, item):
     return found, t
 
 
-def main():
-    d = {
-          'Sequential Search':         [sequential_search, 0,0,0]
-        , 'Ordered Sequential Search': [ordered_sequential_search, 0,0,0]
-        , 'Binary Search Iterative':   [binary_search_iterative, 0,0,0]
-        , 'Binary Search Recursive':   [binary_search_recursive, 0,0,0]
-    }
-    e_num = 500, 1000, 5000
-    n_ls = 100
-    target = 99999999
+def benchmark_results(d, n_num, n_ls, target):
+    for _, v in d.items():
+        for _ in range(len(n_num)):
+            v.append(0)
 
     e = 0
-    for n in e_num:
+    for n in n_num:
         e += 1
         for _ in range(n_ls):
             a_list = get_me_random_list(n)
@@ -117,11 +111,25 @@ def main():
                 d[k][e] += t
 
     for e in range(e):
-        print('%s lists of %s elements:' % (n_ls, e_num[e]))
+        print('%s lists of %s elements:' % (n_ls, n_num[e]))
         for k, v in d.items():
             print('%s took %10.7f seconds to run, on average'
                   % (k, v[e + 1] / n_ls))
         print('')
+
+
+def main():
+    d = {
+          'Sequential Search':         [sequential_search]
+        , 'Ordered Sequential Search': [ordered_sequential_search]
+        , 'Binary Search Iterative':   [binary_search_iterative]
+        , 'Binary Search Recursive':   [binary_search_recursive]
+    }
+    list_sizes = 500, 1000, 5000
+    num_per_size = 100
+    search_target = 99999999
+
+    benchmark_results(d, list_sizes, num_per_size, search_target)
 
 
 if __name__ == "__main__":
