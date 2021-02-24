@@ -94,7 +94,7 @@ def benchmark_results(funcs, n_num, n_ls):
 
 
 def main():
-    funcs = [
+    algos = [
         insertion_sort
        ,shell_sort
        ,python_sort
@@ -102,7 +102,7 @@ def main():
     list_sizes = 500, 1000, 5000
     num_per_size = 100
 
-    benchmark_results(funcs, list_sizes, num_per_size)
+    benchmark_results(algos, list_sizes, num_per_size)
 
 
 if __name__ == "__main__":
