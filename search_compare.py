@@ -95,7 +95,12 @@ def binary_search_recursive(a_list, item):
     return found, t
 
 
-def benchmark_results(d, n_num, n_ls, target):
+def benchmark_results(funcs, n_num, n_ls, target):
+    d = dict()
+    for i in range(len(funcs)):
+        name = funcs[i].__name__
+        d[name.replace('_', ' ').title()] = [funcs[i]]
+
     for _, v in d.items():
         for _ in range(len(n_num)):
             v.append(0)
@@ -119,17 +124,17 @@ def benchmark_results(d, n_num, n_ls, target):
 
 
 def main():
-    d = {
-          'Sequential Search':         [sequential_search]
-        , 'Ordered Sequential Search': [ordered_sequential_search]
-        , 'Binary Search Iterative':   [binary_search_iterative]
-        , 'Binary Search Recursive':   [binary_search_recursive]
-    }
+    algos = [
+        sequential_search
+       ,ordered_sequential_search
+       ,binary_search_iterative
+       ,binary_search_recursive
+    ]
     list_sizes = 500, 1000, 5000
     num_per_size = 100
     search_target = 99999999
 
-    benchmark_results(d, list_sizes, num_per_size, search_target)
+    benchmark_results(algos, list_sizes, num_per_size, search_target)
 
 
 if __name__ == "__main__":

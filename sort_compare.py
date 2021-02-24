@@ -66,7 +66,12 @@ def python_sort(a_list):
     return t
 
 
-def benchmark_results(d, n_num, n_ls):
+def benchmark_results(funcs, n_num, n_ls):
+    d = dict()
+    for i in range(len(funcs)):
+        name = funcs[i].__name__
+        d[name.replace('_', ' ').title()] = [funcs[i]]
+
     for _, v in d.items():
         for _ in range(len(n_num)):
             v.append(0)
@@ -89,15 +94,15 @@ def benchmark_results(d, n_num, n_ls):
 
 
 def main():
-    d = {
-          'Insertion Sort': [insertion_sort]
-        , 'Shell Sort':     [shell_sort]
-        , 'Python Sort':    [python_sort]
-    }
+    funcs = [
+        insertion_sort
+       ,shell_sort
+       ,python_sort
+    ]
     list_sizes = 500, 1000, 5000
     num_per_size = 100
 
-    benchmark_results(d, list_sizes, num_per_size)
+    benchmark_results(funcs, list_sizes, num_per_size)
 
 
 if __name__ == "__main__":
