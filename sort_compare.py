@@ -68,22 +68,31 @@ def python_sort(a_list):
 
 def main():
     d = {
-          'Insertion Sort': [insertion_sort, 0]
-        , 'Shell Sort':     [shell_sort, 0]
-        , 'Python Sort':    [python_sort, 0]
+          'Insertion Sort': [insertion_sort, 0,0,0]
+        , 'Shell Sort':     [shell_sort, 0,0,0]
+        , 'Python Sort':    [python_sort, 0,0,0]
     }
+    e_num = 500, 1000, 5000
+    n_ls = 100
+
     count = 0
-    for n in 500, 1000, 10000:
-        for _ in range(100):
+    e = 0
+    for n in e_num:
+        e += 1
+        for _ in range(n_ls):
             count += 1
             a_list = get_me_random_list(n)
+            a_list.sort()
             for k, v in d.items():
                 t = v[0](a_list)
-                d[k][1] += t
+                d[k][e] += t
 
-    d.update((k, v[1] / count) for k, v in d.items())
-    for k, v in d.items():
-        print('%s took %10.7f seconds to run, on average' % (k, v))
+    for e in range(1, e + 1):
+        print('%s lists of %s elements:' % (n_ls, e_num[e - 1]))
+        for k, v in d.items():
+            print('%s took %10.7f seconds to run, on average'
+                  % (k, v[e] / n_ls))
+        print('')
 
 
 if __name__ == "__main__":

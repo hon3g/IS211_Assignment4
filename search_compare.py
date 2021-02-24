@@ -97,24 +97,33 @@ def binary_search_recursive(a_list, item):
 
 def main():
     d = {
-          'Sequential Search':         [sequential_search, 0]
-        , 'Ordered Sequential Search': [ordered_sequential_search, 0]
-        , 'Binary Search Iterative':   [binary_search_iterative, 0]
-        , 'Binary Search Recursive':   [binary_search_recursive, 0]
+          'Sequential Search':         [sequential_search, 0,0,0]
+        , 'Ordered Sequential Search': [ordered_sequential_search, 0,0,0]
+        , 'Binary Search Iterative':   [binary_search_iterative, 0,0,0]
+        , 'Binary Search Recursive':   [binary_search_recursive, 0,0,0]
     }
+    e_num = 500, 1000, 5000
+    n_ls = 100
+    target = 99999999
+
     count = 0
-    for n in 500, 1000, 10000:
-        for _ in range(100):
+    e = 0
+    for n in e_num:
+        e += 1
+        for _ in range(n_ls):
             count += 1
             a_list = get_me_random_list(n)
             a_list.sort()
             for k, v in d.items():
-                _, t = v[0](a_list, -1)
-                d[k][1] += t
+                _, t = v[0](a_list, target)
+                d[k][e] += t
 
-    d.update((k, v[1] / count) for k, v in d.items())
-    for k, v in d.items():
-        print('%s took %10.7f seconds to run, on average' % (k, v))
+    for e in range(1, e+1):
+        print('%s lists of %s elements:' % (n_ls, e_num[e-1]))
+        for k, v in d.items():
+            print('%s took %10.7f seconds to run, on average'
+                  % (k, v[e] / n_ls))
+        print('')
 
 
 if __name__ == "__main__":
