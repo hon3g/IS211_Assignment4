@@ -106,23 +106,21 @@ def main():
     n_ls = 100
     target = 99999999
 
-    count = 0
     e = 0
     for n in e_num:
         e += 1
         for _ in range(n_ls):
-            count += 1
             a_list = get_me_random_list(n)
             a_list.sort()
             for k, v in d.items():
                 _, t = v[0](a_list, target)
                 d[k][e] += t
 
-    for e in range(1, e+1):
-        print('%s lists of %s elements:' % (n_ls, e_num[e-1]))
+    for e in range(e):
+        print('%s lists of %s elements:' % (n_ls, e_num[e]))
         for k, v in d.items():
             print('%s took %10.7f seconds to run, on average'
-                  % (k, v[e] / n_ls))
+                  % (k, v[e + 1] / n_ls))
         print('')
 
 
